@@ -1,8 +1,7 @@
 import React from 'react';
 import Challenge from './componetsChallenge/Challenge-one'
 
-function Textoimput() { 
-  const [text, setTexto] = React.useState('');
+function Textoimput() {
     return (
       <div>
         <Challenge />
