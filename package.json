@@ -2,7 +2,7 @@
   "name": "textoreto",
   "version": "0.1.0",
   "private": true,
-  "homepage”: “http://{sebastianHoyosLopez}.github.io/{git@github.com:SebastianHoyosLopez/Challenges.git}",
+  "homepage": "https://sebastianhoyoslopez.github.io/Challenges/", 
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
