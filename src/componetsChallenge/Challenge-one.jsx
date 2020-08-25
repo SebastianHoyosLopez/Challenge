@@ -6,7 +6,7 @@ function TextImput() {
     return (
       <div>
         <header className="container">
-          <div className="mt-5 col">
+          <div className="mt-5 col-6">
             <strong>Escribe algo en este div: </strong>
             {text}
           </div>
