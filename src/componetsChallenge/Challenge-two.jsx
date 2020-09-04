@@ -59,7 +59,7 @@ function PersonList() {
             <table className="table mt-3">
               <thead>
                 <tr>
-                <th scope="col">Posición</th>
+                <th scope="col">Cantidad</th>
                   <th scope="col">Edad</th>
                   <th scope="col">Sexo</th>
                   <th scope="col">Tipo</th>
