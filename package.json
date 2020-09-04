@@ -2,7 +2,7 @@
   "name": "textoreto",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sebastianhoyoslopez.github.io/Challenges/",
+  "homepage": "https://sebastianhoyoslopez.github.io/Challenge/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -35,5 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   }
 }
