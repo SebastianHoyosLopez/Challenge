@@ -25,7 +25,7 @@ function PersonList() {
       <div className="row">
         <div className="col">
           <h4 className="my-5 text-center">
-            Consulta sobre pacientes con Covid-19 en el Oriente Antioqueño{' '}
+            Consulta sobre pacientes con Covid-19{' '}
           </h4>
           <div className="row">
             <div className="col">
@@ -59,7 +59,7 @@ function PersonList() {
             <table className="table mt-3">
               <thead>
                 <tr>
-                <th scope="col">Cantidad</th>
+                  <th scope="col">Cantidad</th>
                   <th scope="col">Edad</th>
                   <th scope="col">Sexo</th>
                   <th scope="col">Tipo</th>
