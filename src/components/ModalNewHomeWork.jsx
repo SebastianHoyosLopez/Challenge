@@ -12,8 +12,8 @@ const NewHomeWork = (props) => {
 
   const onSubmit = (data, e) => {
     console.log(data)
-    abrirCerrar()
     props.addHomeWork(data)
+    abrirCerrar()
     //limpiar campos
     e.target.reset()
   }
@@ -58,7 +58,7 @@ const NewHomeWork = (props) => {
                 <div>{errors?.description?.message}</div>
               </div>
             </div>
-            <div>
+            <div className="modal-footer">
               <button className="btn btn-primary my-2">Agregar</button>
               <button className="btn btn-warning" onClick={() => abrirCerrar()}>
                 Cancelar
