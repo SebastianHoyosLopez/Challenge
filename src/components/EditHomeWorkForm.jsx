@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
-const NewHomeWork = (props) => {
+const EditHomeWorkForm = (props) => {
   const [modal, setmodal] = useState(false);
   const { register, errors, handleSubmit } = useForm();
 
@@ -11,9 +11,8 @@ const NewHomeWork = (props) => {
   };
 
   const onSubmit = (data, e) => {
-    //console.log(data)
+    console.log(data);
     abrirCerrar();
-    props.addHomeWork(data);
     //limpiar campos
     e.target.reset();
   };
@@ -21,19 +20,19 @@ const NewHomeWork = (props) => {
   return (
     <div>
       <Button className="btn btn-primary" onClick={() => abrirCerrar()}>
-        Crear Tarea
+        Editar
       </Button>
 
       <Modal show={modal}>
         <Modal.Header>
-          <Modal.Title>Ingrese la Tarea a la Tabla</Modal.Title>
+          <Modal.Title>Editar Tarea</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-row">
               <div className="col">
                 <label>Nombre de la tarea</label>
-                <input
+                <Form.Control
                   type="text"
                   className="form-control"
                   placeholder="Nombre"
@@ -46,7 +45,7 @@ const NewHomeWork = (props) => {
               </div>
               <div className="col">
                 <label>Descripción de la tarea</label>
-                <input
+                <Form.Control
                   type="text"
                   className="form-control"
                   placeholder="descripción"
@@ -59,16 +58,16 @@ const NewHomeWork = (props) => {
               </div>
             </div>
             <div>
-              <button className="btn btn-primary my-2">Agregar</button>
+              <button className="btn btn-primary my-2">Guardar Cambios</button>
               <button className="btn btn-warning" onClick={() => abrirCerrar()}>
                 Cancelar
               </button>
             </div>
-          </form>
+          </Form>
         </Modal.Body>
       </Modal>
     </div>
   );
 };
 
-export default NewHomeWork;
+export default EditHomeWorkForm;

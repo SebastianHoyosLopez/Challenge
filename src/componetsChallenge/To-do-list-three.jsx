@@ -1,18 +1,22 @@
-import React, { useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import TableToDoList from '../components/TableToDoList'
-import { v4 as uuidv4 } from 'uuid'
-import ModalNewHomeWork from '../components/ModalNewHomeWork'
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import TableToDoList from "../components/TableToDoList";
+import { v4 as uuidv4 } from "uuid";
+import ModalNewHomeWork from "../components/ModalNewHomeWork";
 
 function Todolist() {
-  const TodoData = []
-
-  const [homeWorks, setHomeWorks] = useState(TodoData)
+  const TodoData = [];
+  
+  const [homeWorks, setHomeWorks] = useState(TodoData);
 
   const addHomeWork = (homeWork) => {
-    homeWork.id = uuidv4()
-    setHomeWorks([...homeWorks, homeWork])
-  }
+    homeWork.id = uuidv4();
+    setHomeWorks([...homeWorks, homeWork]);
+  };
+
+  const deleteHomeWork = id => {
+    setHomeWorks(homeWorks.filter(homeWork => homeWork.id !== id));
+  };
 
   return (
     <div className="container">
@@ -24,11 +28,14 @@ function Todolist() {
       </div>
       <div>
         <div>
-          <TableToDoList homeWorks={homeWorks} />
+          <TableToDoList
+            homeWorks={homeWorks}
+            deleteHomeWork={deleteHomeWork}
+          />
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Todolist
+export default Todolist;
