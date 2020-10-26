@@ -1,29 +1,29 @@
 import React, { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 const EditHomeWorkForm = (props) => {
-  const [modal, setmodal] = useState(false);
   const { register, errors, handleSubmit } = useForm();
 
-  const abrirCerrar = () => {
-    setmodal(!modal);
+  const onSubmit = (data) => {
+    console.log(data);
+    props.abrirCerrar();
   };
 
-  const onSubmit = (data, e) => {
-    console.log(data);
-    abrirCerrar();
-    //limpiar campos
-    e.target.reset();
+  const editHomeWork = (id) => {
+    props.setCurrentHomeWork(
+      props.currentHomeWork.map((currentHomeWork) => props.currentHomeWork.id == id)
+    );
+  };
+
+  const handleInputChange = (e) => {
+    console.log(e.target.value);
+    props.setCurrentHomeWork(e.target.value);
   };
 
   return (
     <div>
-      <Button className="btn btn-primary" onClick={() => abrirCerrar()}>
-        Editar
-      </Button>
-
-      <Modal show={modal}>
+      <Modal show={props.modal}>
         <Modal.Header>
           <Modal.Title>Editar Tarea</Modal.Title>
         </Modal.Header>
@@ -37,11 +37,15 @@ const EditHomeWorkForm = (props) => {
                   className="form-control"
                   placeholder="Nombre"
                   name="name"
+                  value={props.currentHomeWork?.name}
+                  onChange={handleInputChange}
                   ref={register({
                     required: { value: true, message: "Campo Requerido" },
                   })}
                 />
-                <div>{errors?.name?.message}</div>
+                <span className="text-danger text-small">
+                  {errors?.name?.message}
+                </span>
               </div>
               <div className="col">
                 <label>Descripción de la tarea</label>
@@ -50,18 +54,20 @@ const EditHomeWorkForm = (props) => {
                   className="form-control"
                   placeholder="descripción"
                   name="description"
+                  value={props.currentHomeWork?.description}
+                  onChange={handleInputChange}
                   ref={register({
                     required: { value: true, message: "Campo Requerido" },
                   })}
                 />
-                <div>{errors?.description?.message}</div>
+                <span className="text-danger text-small">
+                  {errors?.description?.message}
+                </span>
               </div>
             </div>
             <div>
               <button className="btn btn-primary my-2">Guardar Cambios</button>
-              <button className="btn btn-warning" onClick={() => abrirCerrar()}>
-                Cancelar
-              </button>
+              <button className="btn btn-warning">Cancelar</button>
             </div>
           </Form>
         </Modal.Body>

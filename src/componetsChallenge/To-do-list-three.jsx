@@ -6,7 +6,7 @@ import ModalNewHomeWork from "../components/ModalNewHomeWork";
 
 function Todolist() {
   const TodoData = [];
-  
+
   const [homeWorks, setHomeWorks] = useState(TodoData);
 
   const addHomeWork = (homeWork) => {
@@ -14,8 +14,8 @@ function Todolist() {
     setHomeWorks([...homeWorks, homeWork]);
   };
 
-  const deleteHomeWork = id => {
-    setHomeWorks(homeWorks.filter(homeWork => homeWork.id !== id));
+  const deleteHomeWork = (id) => {
+    setHomeWorks(homeWorks.filter((homeWork) => homeWork.id !== id));
   };
 
   return (
@@ -29,7 +29,9 @@ function Todolist() {
       <div>
         <div>
           <TableToDoList
+            TodoData={TodoData}
             homeWorks={homeWorks}
+            setHomeWorks={setHomeWorks}
             deleteHomeWork={deleteHomeWork}
           />
         </div>
