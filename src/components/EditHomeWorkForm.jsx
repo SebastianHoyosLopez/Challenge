@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 const EditHomeWorkForm = (props) => {
   const { register, errors, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (datainf) => {
+    console.log(datainf);
     props.abrirCerrar();
   };
 
-  const editHomeWork = (id) => {
-    props.setCurrentHomeWork(
-      props.currentHomeWork.map((currentHomeWork) => props.currentHomeWork.id == id)
-    );
-  };
-
   const handleInputChange = (e) => {
-    console.log(e.target.value);
-    props.setCurrentHomeWork(e.target.value);
+    const { name, value } = e.target;
+    props.setCurrentHomeWork((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+    props.editHomeWork();
   };
 
   return (
@@ -37,7 +35,7 @@ const EditHomeWorkForm = (props) => {
                   className="form-control"
                   placeholder="Nombre"
                   name="name"
-                  value={props.currentHomeWork?.name}
+                  value={props.currentHomeWork && props.currentHomeWork.name}
                   onChange={handleInputChange}
                   ref={register({
                     required: { value: true, message: "Campo Requerido" },
@@ -54,7 +52,7 @@ const EditHomeWorkForm = (props) => {
                   className="form-control"
                   placeholder="descripción"
                   name="description"
-                  value={props.currentHomeWork?.description}
+                  value={props.currentHomeWork && props.currentHomeWork.description}
                   onChange={handleInputChange}
                   ref={register({
                     required: { value: true, message: "Campo Requerido" },
@@ -66,8 +64,18 @@ const EditHomeWorkForm = (props) => {
               </div>
             </div>
             <div>
-              <button className="btn btn-primary my-2">Guardar Cambios</button>
-              <button className="btn btn-warning">Cancelar</button>
+              <button
+                className="btn btn-primary my-2"
+                onClick={() => props.editHomeWork()}
+              >
+                Actualizar
+              </button>
+              <button
+                className="btn btn-warning"
+                onClick={() => props.setModal(props.modal)}
+              >
+                Cancelar
+              </button>
             </div>
           </Form>
         </Modal.Body>

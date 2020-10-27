@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import EditHomeWorkForm from "./EditHomeWorkForm";
 
-const TableToDoList = (props) => {
+const TableToDoList = (props) => {  
+  const [data, setData] = useState(props.TodoData);
   console.log(props.homeWorks);
   const [modal, setModal] = useState(false);
   const [currentHomeWork, setCurrentHomeWork] = useState(null);
 
   const abrirCerrar = () => {
     setModal(!modal);
+  };
+
+  const editHomeWork = () => {
+    const dataNew = data;
+    dataNew.map((homeWork) => {
+      if (homeWork.id === currentHomeWork.id) {
+        homeWork.name = currentHomeWork.name;
+        homeWork.name = currentHomeWork.description;
+      }
+    });
+    setData(dataNew);
   };
 
   return (
@@ -60,6 +72,7 @@ const TableToDoList = (props) => {
         abrirCerrar={abrirCerrar}
         currentHomeWork={currentHomeWork}
         setCurrentHomeWork={setCurrentHomeWork}
+        editHomeWork={editHomeWork}
       />
     </>
   );
