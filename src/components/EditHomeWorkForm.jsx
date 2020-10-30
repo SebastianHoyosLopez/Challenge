@@ -12,11 +12,7 @@ const EditHomeWorkForm = (props) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    props.setCurrentHomeWork((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-    props.editHomeWork();
+    props.setCurrentHomeWork({ ...props.currentHomeWork, [name]: value });
   };
 
   return (
@@ -52,7 +48,9 @@ const EditHomeWorkForm = (props) => {
                   className="form-control"
                   placeholder="descripción"
                   name="description"
-                  value={props.currentHomeWork && props.currentHomeWork.description}
+                  value={
+                    props.currentHomeWork && props.currentHomeWork.description
+                  }
                   onChange={handleInputChange}
                   ref={register({
                     required: { value: true, message: "Campo Requerido" },
