@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import EditHomeWorkForm from "./EditHomeWorkForm";
 
 const TableToDoList = (props) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   console.log(props.homeWorks);
   const [modal, setModal] = useState(false);
   const [currentHomeWork, setCurrentHomeWork] = useState(null);
@@ -12,13 +17,18 @@ const TableToDoList = (props) => {
 
   const editHomeWork = () => {
     const newData = props.homeWorks.map((homeWork) => {
+      console.log(currentHomeWork);
       if (homeWork.id === currentHomeWork.id) {
+        return currentHomeWork;
+      }
+      if (currentHomeWork.checked === true) {
         return currentHomeWork;
       } else {
         return homeWork;
       }
     });
     props.setHomeWorks(newData);
+    console.log(newData);
   };
 
   return (
@@ -34,7 +44,10 @@ const TableToDoList = (props) => {
         <tbody>
           {props.homeWorks.length > 0 ? (
             props.homeWorks.map((homeWork) => (
-              <tr key={homeWork.id}>
+              <tr
+                key={homeWork.id}
+                className={homeWork.checked ? "homeWork-checked" : ""}
+              >
                 <td>{homeWork.name}</td>
                 <td>{homeWork.description}</td>
                 <td>
@@ -42,7 +55,7 @@ const TableToDoList = (props) => {
                     className="btn btn-primary"
                     onClick={() => {
                       setCurrentHomeWork(homeWork);
-                      abrirCerrar();
+                      handleShow();
                     }}
                   >
                     Editar
@@ -66,9 +79,10 @@ const TableToDoList = (props) => {
         </tbody>
       </table>
       <EditHomeWorkForm
-        modal={modal}
-        setModal={setModal}
-        abrirCerrar={abrirCerrar}
+        show={show}
+        setShow={setShow}
+        handleShow={handleShow}
+        handleClose={handleClose}
         currentHomeWork={currentHomeWork}
         setCurrentHomeWork={setCurrentHomeWork}
         editHomeWork={editHomeWork}

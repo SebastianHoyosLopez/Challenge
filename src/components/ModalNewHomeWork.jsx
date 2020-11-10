@@ -1,74 +1,72 @@
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 const NewHomeWork = (props) => {
-  const [modal, setmodal] = useState(false);
+  const [show, setShow] = useState(false);
   const { register, errors, handleSubmit } = useForm();
 
-  const abrirCerrar = () => {
-    setmodal(!modal);
-  };
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const onSubmit = (data, e) => {
-    //console.log(data)
-    abrirCerrar();
     props.addHomeWork(data);
+    handleClose();
     //limpiar campos
     e.target.reset();
   };
-
+  
   return (
-    <div>
-      <Button className="btn btn-primary" onClick={() => abrirCerrar()}>
-        Crear Tarea
+    <>
+      <Button className="btn btn-secondary btn-lg" onClick={handleShow}>
+        Create task
       </Button>
-
-      <Modal show={modal}>
-        <Modal.Header>
-          <Modal.Title>Ingrese la Tarea a la Tabla</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={handleSubmit(onSubmit)}>
+      <Modal show={show}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Modal.Header>
+            <Modal.Title>Register the table fields</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <div className="form-row">
-              <div className="col">
-                <label>Nombre de la tarea</label>
+              <div className="col-6">
+                <label>Name</label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Nombre"
+                  placeholder=" Name"
                   name="name"
                   ref={register({
-                    required: { value: true, message: "Campo Requerido" },
+                    required: { value: true, message: "Required field" },
                   })}
                 />
                 <div>{errors?.name?.message}</div>
               </div>
-              <div className="col">
-                <label>Descripción de la tarea</label>
+              <div className="col-6">
+                <label>Description</label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="descripción"
+                  placeholder=" Description"
                   name="description"
                   ref={register({
-                    required: { value: true, message: "Campo Requerido" },
+                    required: { value: true, message: "Required field" },
                   })}
                 />
                 <div>{errors?.description?.message}</div>
               </div>
             </div>
-            <div>
-              <button className="btn btn-primary my-2">Agregar</button>
-              <button className="btn btn-warning" onClick={() => abrirCerrar()}>
-                Cancelar
-              </button>
-            </div>
-          </form>
-        </Modal.Body>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" type="submit">
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
-    </div>
+    </>
   );
 };
-
 export default NewHomeWork;

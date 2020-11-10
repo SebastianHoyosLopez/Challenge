@@ -5,9 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import ModalNewHomeWork from "../components/ModalNewHomeWork";
 
 function Todolist() {
-  const TodoData = [];
 
-  const [homeWorks, setHomeWorks] = useState(TodoData);
+  const [homeWorks, setHomeWorks] = useState([]);
 
   const addHomeWork = (homeWork) => {
     homeWork.id = uuidv4();
@@ -29,7 +28,6 @@ function Todolist() {
       <div>
         <div>
           <TableToDoList
-            TodoData={TodoData}
             homeWorks={homeWorks}
             setHomeWorks={setHomeWorks}
             deleteHomeWork={deleteHomeWork}

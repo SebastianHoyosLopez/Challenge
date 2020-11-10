@@ -1,28 +1,36 @@
 import React from "react";
-import { Form, Modal } from "react-bootstrap";
+import { Form, Modal, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 const EditHomeWorkForm = (props) => {
   const { register, errors, handleSubmit } = useForm();
 
-  const onSubmit = (datainf) => {
-    console.log(datainf);
-    props.abrirCerrar();
+  const onSubmit = (data) => {
+    console.log(data);
+    props.handleClose();
+    props.editHomeWork();
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    props.setCurrentHomeWork({ ...props.currentHomeWork, [name]: value });
+    //const name = e.target.name;
+    //const value = e.target.value;
+    //const checked = e.target.checked;
+    //const type = e.target.type;
+    const { name, value, checked, type } = e.target;
+    props.setCurrentHomeWork({
+      ...props.currentHomeWork,
+      [name]: type === "checkbox" ? checked : value,
+    });
   };
 
   return (
-    <div>
-      <Modal show={props.modal}>
-        <Modal.Header>
-          <Modal.Title>Editar Tarea</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit(onSubmit)}>
+    <>
+      <Modal show={props.show}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Modal.Header>
+            <Modal.Title>Editar Tarea</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <div className="form-row">
               <div className="col">
                 <label>Nombre de la tarea</label>
@@ -62,23 +70,28 @@ const EditHomeWorkForm = (props) => {
               </div>
             </div>
             <div>
-              <button
-                className="btn btn-primary my-2"
-                onClick={() => props.editHomeWork()}
-              >
-                Actualizar
-              </button>
-              <button
-                className="btn btn-warning"
-                onClick={() => props.setModal(props.modal)}
-              >
-                Cancelar
-              </button>
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check
+                  name="checked"
+                  type="checkbox"
+                  label="Tarea completada"
+                  checkep="false"
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
             </div>
-          </Form>
-        </Modal.Body>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" type="submit">
+              Actualizar
+            </Button>
+            <Button variant="secondary" onClick={props.handleClose}>
+              Cancelar
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
-    </div>
+    </>
   );
 };
 
