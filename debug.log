@@ -24,3 +24,5 @@
 [0831/001306.505:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
 [0831/001306.505:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
 [0831/001306.505:ERROR:process_reader_win.cc(151)] SuspendThread: Acceso denegado. (0x5)
+[1104/142717.808:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
+[1109/212229.447:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)

@@ -30,4 +30,4 @@ function PracticeToDo() {
   )
 }
 
-export default PracticeToDo
+export default PracticeToDo;
