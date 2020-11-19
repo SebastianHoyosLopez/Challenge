@@ -56,7 +56,7 @@ const TableToDoList = (props) => {
                     Editar
                   </button>
                   <button
-                    className="btn btn-secondary"
+                    className="btn btn-secondary ml-2"
                     onClick={() => {
                       props.deleteHomeWork(homeWork.id)
                     }}

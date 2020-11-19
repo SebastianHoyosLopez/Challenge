@@ -1,12 +1,10 @@
 import React from "react";
 import { Form, Modal, Button } from "react-bootstrap";
-import { useForm } from "react-hook-form";
 
 const EditHomeWorkForm = (props) => {
-  const { register, errors, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (e) => {
+    e.preventDefault();
     props.handleClose();
     props.editHomeWork();
   };
@@ -23,7 +21,7 @@ const EditHomeWorkForm = (props) => {
   return (
     <>
       <Modal show={props.show}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
           <Modal.Header>
             <Modal.Title>Editar Tarea</Modal.Title>
           </Modal.Header>
@@ -37,14 +35,9 @@ const EditHomeWorkForm = (props) => {
                   placeholder="Nombre"
                   name="name"
                   value={props.currentHomeWork && props.currentHomeWork.name}
+                  required={true}
                   onChange={handleInputChange}
-                  ref={register({
-                    required: { value: true, message: "Campo Requerido" },
-                  })}
                 />
-                <span className="text-danger text-small">
-                  {errors?.name?.message}
-                </span>
               </div>
               <div className="col">
                 <label>Descripción de la tarea</label>
@@ -53,17 +46,12 @@ const EditHomeWorkForm = (props) => {
                   className="form-control"
                   placeholder="descripción"
                   name="description"
+                  required={true}
                   value={
                     props.currentHomeWork && props.currentHomeWork.description
                   }
                   onChange={handleInputChange}
-                  ref={register({
-                    required: { value: true, message: "Campo Requerido" },
-                  })}
                 />
-                <span className="text-danger text-small">
-                  {errors?.description?.message}
-                </span>
               </div>
             </div>
             <div>
@@ -72,18 +60,20 @@ const EditHomeWorkForm = (props) => {
                   name="checked"
                   type="checkbox"
                   label="Tarea completada"
-                  checkep="false"
+                  checked={
+                    props.currentHomeWork && props.currentHomeWork.checked
+                  }
                   onChange={handleInputChange}
                 />
               </Form.Group>
             </div>
           </Modal.Body>
           <Modal.Footer>
+             <Button variant="secondary" onClick={props.handleClose}>
+              Cancelar
+            </Button>
             <Button variant="primary" type="submit">
               Actualizar
-            </Button>
-            <Button variant="secondary" onClick={props.handleClose}>
-              Cancelar
             </Button>
           </Modal.Footer>
         </form>
