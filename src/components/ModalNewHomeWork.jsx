@@ -15,16 +15,16 @@ const NewHomeWork = (props) => {
     //limpiar campos
     e.target.reset();
   };
-  
+
   return (
     <>
       <Button className="btn btn-primary btn-lg" onClick={handleShow}>
         Create Tarea
       </Button>
       <Modal show={show}>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header>
-            <Modal.Title>Register the table fields</Modal.Title>
+            <Modal.Title>New Homework</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div className="form-row">
@@ -35,11 +35,8 @@ const NewHomeWork = (props) => {
                   className="form-control"
                   placeholder=" Name"
                   name="name"
-                  ref={register({
-                    required: { value: true, message: "Required field" },
-                  })}
+                  required="required"
                 />
-                <div>{errors?.name?.message}</div>
               </div>
               <div className="col-6">
                 <label>Description</label>
@@ -64,7 +61,7 @@ const NewHomeWork = (props) => {
               Save Changes
             </Button>
           </Modal.Footer>
-        </Form>
+        </form>
       </Modal>
     </>
   );

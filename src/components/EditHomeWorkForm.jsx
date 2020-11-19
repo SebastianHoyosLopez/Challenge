@@ -23,7 +23,7 @@ const EditHomeWorkForm = (props) => {
   return (
     <>
       <Modal show={props.show}>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header>
             <Modal.Title>Editar Tarea</Modal.Title>
           </Modal.Header>
@@ -31,7 +31,7 @@ const EditHomeWorkForm = (props) => {
             <div className="form-row">
               <div className="col">
                 <label>Nombre de la tarea</label>
-                <Form.Control
+                <input
                   type="text"
                   className="form-control"
                   placeholder="Nombre"
@@ -48,7 +48,7 @@ const EditHomeWorkForm = (props) => {
               </div>
               <div className="col">
                 <label>Descripción de la tarea</label>
-                <Form.Control
+                <input
                   type="text"
                   className="form-control"
                   placeholder="descripción"
@@ -86,7 +86,7 @@ const EditHomeWorkForm = (props) => {
               Cancelar
             </Button>
           </Modal.Footer>
-        </Form>
+        </form>
       </Modal>
     </>
   );

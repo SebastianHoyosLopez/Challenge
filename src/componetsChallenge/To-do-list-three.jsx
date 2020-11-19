@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TableToDoList from "../components/TableToDoList";
 import { v4 as uuidv4 } from "uuid";
@@ -9,26 +9,30 @@ function Todolist() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    document.title=`you have ${count} homeworks`; 
+    document.title = `you have ${count} homeworks`;
   }, [count]);
 
   const addHomeWork = (homeWork) => {
     homeWork.id = uuidv4();
     setHomeWorks([...homeWorks, homeWork]);
-    setCount(count+1)
+    setCount(count + 1);
   };
 
   const deleteHomeWork = (id) => {
     setHomeWorks(homeWorks.filter((homeWork) => homeWork.id !== id));
-    setCount(count-1)
+    setCount(count - 1);
   };
 
   return (
     <div className="container">
       <div className="row">
-  <h1 className="col">Cantidad De Tareas Pendientes {count}</h1>
+        <h1 className="col">Cantidad De Tareas Pendientes: {count} </h1>
         <div className="col mt-2">
-          <ModalNewHomeWork addHomeWork={addHomeWork} />
+          <ModalNewHomeWork
+            addHomeWork={addHomeWork}
+            setHomeWorks={setHomeWorks}
+            homeWorks={homeWorks}
+          />
         </div>
       </div>
       <div>
