@@ -4,13 +4,19 @@ import { useForm } from "react-hook-form";
 
 const NewHomeWork = (props) => {
   const [show, setShow] = useState(false);
-  const { register, errors, handleSubmit } = useForm();
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const onSubmit = (data, e) => {
-    props.addHomeWork(data);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    props.addHomeWork({
+      name: name,
+      description: description,
+      checked: false,
+    });
     handleClose();
     //limpiar campos
     e.target.reset();
@@ -22,7 +28,7 @@ const NewHomeWork = (props) => {
         Create Tarea
       </Button>
       <Modal show={show}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
           <Modal.Header>
             <Modal.Title>New Homework</Modal.Title>
           </Modal.Header>
@@ -36,6 +42,8 @@ const NewHomeWork = (props) => {
                   placeholder=" Name"
                   name="name"
                   required="required"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div className="col-6">
@@ -45,11 +53,12 @@ const NewHomeWork = (props) => {
                   className="form-control"
                   placeholder=" Description"
                   name="description"
-                  ref={register({
-                    required: { value: true, message: "Required field" },
-                  })}
+                  required="required"
+                  value={description}
+                  onChange={e =>
+                  setDescription(e.target.value)
+                  }
                 />
-                <div>{errors?.description?.message}</div>
               </div>
             </div>
           </Modal.Body>
